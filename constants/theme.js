@@ -3,7 +3,8 @@ const colors = {
     SECONDARY: '#FFB300',
     BACKGROUND: '#FAFAFA',
     SURFACE: '#FFFFFF',
-    ONBACKGROUND: '#000000'
+    ONBACKGROUND: '#000000',
+    ONSENCONDARY: '#000000'
 };
 
 const size = {

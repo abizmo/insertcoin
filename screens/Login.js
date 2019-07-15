@@ -1,9 +1,14 @@
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Alert, Image, StyleSheet, Text, View} from 'react-native';
 
 import logo from '../assets/images/InsertCoin.png';
 import {strings, theme} from '../constants';
 import {Button, Input} from '../components';
+
+const USER = {
+    EMAIL: 'test@email.com',
+    PWD: '123456'
+};
 
 class Login extends React.Component {
     state = {
@@ -15,6 +20,29 @@ class Login extends React.Component {
         this.setState({
             [field]: text
         });
+    };
+
+    handlePressForgotPassword = () => {
+        Alert.alert(
+            strings.login.FORGOT_TITLE,
+            strings.login.FORGOT_MSG,
+            [
+                {text: 'Ok', onPress: () => console.log('Forgot pwd')},
+            ],
+            {cancelable: false},
+        );
+    };
+
+    handlePressLogin = () => {
+        if (this.state.email === USER.EMAIL && this.state.password === USER.PWD)
+            return this.props.navigation.navigate('App');
+        Alert.alert(
+            'ERROR',
+            'ERROR MSG',
+            [
+                {text: 'Ok', onPress: () => console.log('Login pressed')}
+            ]
+        )
     };
 
     render () {
@@ -35,10 +63,10 @@ class Login extends React.Component {
                         value={password}
                         onChangeText={(password) => this.handleChangeText('password', password)}
                     />
-                    <Text style={styles.forgot}>
+                    <Text onPress={this.handlePressForgotPassword} style={styles.forgot}>
                         {strings.login.PWD_FORGOT}
                     </Text>
-                    <Button />
+                    <Button onPress={this.handlePressLogin} title={strings.login.BUTTON_LABEL}/>
                 </View>
             </View>
         );
